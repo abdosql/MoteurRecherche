@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Engine{% endblock %}
+
+{% block body %}
+    <twig:Navbar/>
+    <div class="container mt-5 d-flex flex-column align-items-center">
+        <div class="quote">
+            <h3>Find WhatEver (:</h3>
+        </div>
+
+        <div class="row justify-content-center w-100">
+            <div class="col-md-6">
+                <form action="" method="get" class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search..." name="query">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
