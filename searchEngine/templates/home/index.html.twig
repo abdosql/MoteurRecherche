@@ -3,17 +3,58 @@
 {% block title %}Search Engine{% endblock %}
 
 {% block body %}
+    <style>
+        .form{
+
+            position: relative;
+        }
+
+
+        .form span {
+            position: absolute;
+            right: 5px;
+            top: 8px;
+            padding: 2px;
+            border-left: 1px solid #d1d5db;
+        }
+
+        .left-pan{
+            padding-left: 7px;
+        }
+
+        .left-pan i{
+            color: #91d9bd;
+            padding-left: 5px;
+            font-size: 1.5rem;
+        }
+
+        .form-input{
+
+            height: 55px;
+            text-indent: 33px;
+            border-radius: 10px;
+        }
+
+        .form-input:focus{
+
+            box-shadow: none;
+            border:none;
+        }
+    </style>
     <twig:Navbar/>
-    <div class="container mt-5 d-flex flex-column align-items-center">
-        <div class="quote">
-            <h3>Find WhatEver (:</h3>
+    <div class="container mt-5 d-flex flex-column align-items-center justify-content-center" style="height: 50vh">
+        <div class="logo pb-4">
+            <img width="250" src="{{ asset('images/logo-no-background-body.svg') }}" alt="">
         </div>
 
         <div class="row justify-content-center w-100">
             <div class="col-md-6">
-                <form action="" method="get" class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search..." name="query">
-                    <button class="btn btn-primary" type="submit">Search</button>
+                <form action="" method="get" class="input-group mb-3 transparent-form">
+                    <div class="input-group form rounded shadow">
+                        <input type="text" class="form-control form-input" placeholder="Search anything...">
+                        <span class="left-pan"><button class="btn btn-sm bg-transparent"><i class="fa-brands fa-searchengin"></i>
+                        </button></span>
+                    </div>
                 </form>
             </div>
         </div>

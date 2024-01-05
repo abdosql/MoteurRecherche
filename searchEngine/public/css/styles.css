@@ -1,0 +1,16 @@
+body {
+    background-image: url('../images/backgorund.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+.navbar .navbar-collapse .nav-item i{
+    color: #2f447a;
+    font-size: 1.2rem;
+}
+.navbar .navbar-collapse .nav-item i:hover{
+    color: #111a32;
+    transition: 0.1s;
+}
+
+

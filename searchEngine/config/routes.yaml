@@ -1,7 +1,5 @@
 controllers:
     resource:
-        - path: ../src/Controller/Web
-          namespace: App\Controller\Web
-        - path: ../src/Controller/Api
-          namespace: App\Controller\Api
-    type: annotation
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
