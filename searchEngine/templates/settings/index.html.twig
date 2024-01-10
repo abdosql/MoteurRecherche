@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Engine{% endblock %}
+
+{% block body %}
+    <style>
+        .form{
+
+            position: relative;
+        }
+
+
+        .form span {
+            position: absolute;
+            right: 5px;
+            top: 8px;
+            padding: 2px;
+            border-left: 1px solid #d1d5db;
+        }
+
+        .left-pan{
+            padding-left: 7px;
+        }
+
+        .left-pan i{
+            color: #91d9bd;
+            padding-left: 5px;
+            font-size: 1.5rem;
+        }
+
+        .form-input{
+
+            height: 55px;
+            text-indent: 33px;
+            border-radius: 10px;
+        }
+
+        .form-input:focus{
+
+            box-shadow: none;
+            border:none;
+        }
+    </style>
+    <twig:Navbar/>
+    <div class="container d-flex justify-content-center align-items-center mt-5 flex-column">
+        <h3>Settings</h3>
+        <hr style="width:100%;height: 1px; background-color:gray">
+        <form class="w-50" action="">
+            <div class="form-group">
+                <label for="path">Path :</label>
+                <input class="form-control" type="text" name="path" id="path" value="{{ settings["path"] }}">
+            </div>
+        </form>
+    </div>
+{% endblock %}
