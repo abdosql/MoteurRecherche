@@ -49,9 +49,9 @@
 
         <div class="row justify-content-center w-100">
             <div class="col-md-6">
-                <form action="" method="get" class="input-group mb-3 transparent-form">
+                <form action="{{ path("") }}" method="get" class="input-group mb-3 transparent-form">
                     <div class="input-group form rounded shadow">
-                        <input type="text" class="form-control form-input" placeholder="Search anything...">
+                        <input name="word" type="text" class="form-control form-input" placeholder="Search anything...">
                         <span class="left-pan"><button class="btn btn-sm bg-transparent"><i class="fa-brands fa-searchengin"></i>
                         </button></span>
                     </div>
