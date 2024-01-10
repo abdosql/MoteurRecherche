@@ -1,16 +1,22 @@
-# This is a sample Python script.
+import sys
+import json
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def process_form_data_with_model(data):
+    # Your logic to process the form data
+    print("Received Form Data:", data)
 
+if __name__ == "__main__":
+    try:
+        # Read JSON data from the command-line arguments
+        data = sys.argv[1]
+        data = json.loads(data)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+        # Process the form data
+        process_form_data_with_model(data)
 
+        # Optionally, print a success message
+        print("Form Data Processing Successful")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    except Exception as e:
+        # Handle errors
+        print("Error:", str(e))
