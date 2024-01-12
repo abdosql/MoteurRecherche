@@ -23,6 +23,7 @@ class HomeController extends AbstractController
     #[Route('/search', name: "search")]
     public function search(Request $request, SettingsController $settingsController): Response
     {
+
         $word = $request->request->get("word");
         $settings = $settingsController->readSettings("../settings/settings.json");
         $data = [
@@ -36,6 +37,6 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('searchResults', compact("processOutput"));
         }
         $error = $process->getErrorOutput();
-        return $this->render("error/index.html.twig", compact("error"));
+        return $this->render("error/index.html.twig", compactm("error"));
     }
 }
