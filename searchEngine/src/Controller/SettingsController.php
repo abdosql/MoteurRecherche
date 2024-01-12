@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,10 +17,18 @@ class SettingsController extends AbstractController
             "settings" => $settings
         ]);
     }
-
-    public function updatePath()
+    #[Route("/settings/update", name: "updateSettings")]
+    public function updatePath(Request $request): Response
     {
-        
+
+        $jsonData  = $this->readSettings("../settings/settings.json");
+        $jsonData['path'] = $request->request->get("path");
+
+        $updatedJsonContents = json_encode($jsonData, JSON_PRETTY_PRINT);
+
+        file_put_contents("../settings/settings.json", $updatedJsonContents);
+
+        return $this->redirectToRoute("app_settings");
     }
     public function readSettings($filePath): array
     {

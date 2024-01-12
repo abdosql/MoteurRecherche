@@ -21,9 +21,14 @@ class HomeController extends AbstractController
         return $this->render("home/results.html.twig", compact("processOutput"));
     }
     #[Route('/search', name: "search")]
-    public function search(Request $request): Response
+    public function search(Request $request, SettingsController $settingsController): Response
     {
-        $data = $request->request->get("word");
+        $word = $request->request->get("word");
+        $settings = $settingsController->readSettings("../settings/settings.json");
+        $data = [
+            "word" => $word,
+            "settings" => $settings
+        ];
         $process = new Process(['python', '../../main.py', json_encode($data)]);
         $process->run();
         if ($process->isSuccessful()){
