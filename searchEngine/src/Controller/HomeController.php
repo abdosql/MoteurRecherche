@@ -24,13 +24,13 @@ class HomeController extends AbstractController
     public function search(Request $request): Response
     {
         $data = $request->request->get("word");
-        $process = new Process(['python', '../../main.py', json_encode($data)]);
+        $process = new Process(['python', '/../main.py', json_encode($data)]);
         $process->run();
         if ($process->isSuccessful()){
             $processOutput = $process->getOutput();
             return $this->redirectToRoute('searchResults', compact("processOutput"));
         }
         $error = $process->getErrorOutput();
-        return $this->render("error/index.html.twig", compact("error"));
+        return $this->render("error/index.html.twig", compactm("error"));
     }
 }
