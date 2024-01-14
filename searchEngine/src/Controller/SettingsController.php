@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,8 +14,11 @@ class SettingsController extends AbstractController
     public function index(): Response
     {
         $settings  = $this->readSettings("../settings/settings.json");
+        $path = $settings["path"];
+        $files = $this->listFiles($path);
         return $this->render('settings/index.html.twig', [
-            "settings" => $settings
+            "settings" => $settings,
+            "files" => $files
         ]);
     }
     #[Route("/settings/update", name: "updateSettings")]
@@ -23,6 +27,7 @@ class SettingsController extends AbstractController
 
         $jsonData  = $this->readSettings("../settings/settings.json");
         $jsonData['path'] = $request->request->get("path");
+        $jsonData['documents'] = $request->request->get("file");
 
         $updatedJsonContents = json_encode($jsonData, JSON_PRETTY_PRINT);
 
@@ -41,5 +46,17 @@ class SettingsController extends AbstractController
             throw new \RuntimeException('Error decoding JSON: ' . json_last_error_msg());
         }
         return $jsonData;
+    }
+    public function listFiles($directoryPath): array
+    {
+        $finder = new Finder();
+        $finder->files()->in($directoryPath)->name('*.txt')->depth(0);
+
+        $fileNames = [];
+
+        foreach ($finder as $file) {
+            $fileNames[] = $file->getBasename();
+        }
+        return $fileNames;
     }
 }

@@ -30,13 +30,19 @@ class HomeController extends AbstractController
             "word" => $word,
             "settings" => $settings
         ];
-        $process = new Process(['python', '../../main.py', json_encode($data)]);
+        $condaEnvName = 'test';
+        $pythonPath = 'C:\Users\seqqal\Documents\GitHub\Projects\MoteurRecherche\venv\Scripts\python';  // Adjust the path
+        $activateScript = "C:\Users\seqqal\Documents\GitHub\Projects\MoteurRecherche\venv\Scripts\activate";  // Adjust the path
+
+        $process = new Process([
+            'cmd.exe', '/C', 'activate', $condaEnvName, '&&', $pythonPath, '../../main.py', json_encode($data)
+        ]);
         $process->run();
         if ($process->isSuccessful()){
             $processOutput = $process->getOutput();
             return $this->redirectToRoute('searchResults', compact("processOutput"));
         }
         $error = $process->getErrorOutput();
-        return $this->render("error/index.html.twig", compactm("error"));
+        return $this->render("error/index.html.twig", compact("error"));
     }
 }
