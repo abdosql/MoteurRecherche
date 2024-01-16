@@ -15,10 +15,10 @@ class HomeController extends AbstractController
     {
         return $this->render("home/index.html.twig");
     }
-    #[Route('/results/{processOutput}', name:'searchResults')]
-    public function results($processOutput): Response
+    #[Route('/results/{dataOutput}', name:'searchResults')]
+    public function results($dataOutput): Response
     {
-        return $this->render("home/results.html.twig", compact("processOutput"));
+        return $this->render("home/results.html.twig", compact("dataOutput"));
     }
     #[Route('/search', name: "search")]
     public function search(Request $request, SettingsController $settingsController): Response
@@ -30,17 +30,16 @@ class HomeController extends AbstractController
             "word" => $word,
             "settings" => $settings
         ];
-        $condaEnvName = 'test';
-        $pythonPath = 'C:\Users\seqqal\Documents\GitHub\Projects\MoteurRecherche\venv\Scripts\python';  // Adjust the path
-        $activateScript = "C:\Users\seqqal\Documents\GitHub\Projects\MoteurRecherche\venv\Scripts\activate";  // Adjust the path
-
+        $pythonPath = "C:\ProgramData\anaconda3\python.exe";  // Adjust the path
+        $pythonScriptPath = "C:\Users\seqqal\Documents\GitHub\Projects\MoteurRecherche\main.py";
         $process = new Process([
-            'cmd.exe', '/C', 'activate', $condaEnvName, '&&', $pythonPath, '../../main.py', json_encode($data)
+            $pythonPath, $pythonScriptPath, json_encode($data)
         ]);
         $process->run();
         if ($process->isSuccessful()){
-            $processOutput = $process->getOutput();
-            return $this->redirectToRoute('searchResults', compact("processOutput"));
+            $dataOutput = $process->getOutput();
+
+            return $this->redirectToRoute('searchResults', compact("dataOutput"));
         }
         $error = $process->getErrorOutput();
         return $this->render("error/index.html.twig", compact("error"));

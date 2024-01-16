@@ -54,9 +54,9 @@
                 <label for="options">Select Documents :</label>
                 {% for fileName in files %}
                     <div class="form-group">
-                        <label for="{{ fileName }}">
-                            <input type="radio" id="{{ fileName }}" name="file" value="{{ fileName }}">
-                            {{ fileName }}
+                        <label for="{{ fileName["name"] }}">
+                            <input {{ fileName["status"] }} type="radio" id="{{ fileName["name"] }}" name="file" value="{{ fileName["name"] }}">
+                            {{ fileName["name"] }}
                         </label>
                     </div>
                 {% endfor %}

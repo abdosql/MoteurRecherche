@@ -15,7 +15,8 @@ class SettingsController extends AbstractController
     {
         $settings  = $this->readSettings("../settings/settings.json");
         $path = $settings["path"];
-        $files = $this->listFiles($path);
+        $fileName = $settings["documents"];
+        $files = $this->listFiles($path, $fileName);
         return $this->render('settings/index.html.twig', [
             "settings" => $settings,
             "files" => $files
@@ -28,7 +29,6 @@ class SettingsController extends AbstractController
         $jsonData  = $this->readSettings("../settings/settings.json");
         $jsonData['path'] = $request->request->get("path");
         $jsonData['documents'] = $request->request->get("file");
-
         $updatedJsonContents = json_encode($jsonData, JSON_PRETTY_PRINT);
 
         file_put_contents("../settings/settings.json", $updatedJsonContents);
@@ -47,7 +47,7 @@ class SettingsController extends AbstractController
         }
         return $jsonData;
     }
-    public function listFiles($directoryPath): array
+    public function listFiles($directoryPath, $fileName): array
     {
         $finder = new Finder();
         $finder->files()->in($directoryPath)->name('*.txt')->depth(0);
@@ -55,7 +55,12 @@ class SettingsController extends AbstractController
         $fileNames = [];
 
         foreach ($finder as $file) {
-            $fileNames[] = $file->getBasename();
+            $name = $file->getBasename();
+            $status = ($name == $fileName) ? "checked" : "unchecked";
+            $fileNames[] = [
+                "name" => $name,
+                "status" => $status,
+            ];
         }
         return $fileNames;
     }
