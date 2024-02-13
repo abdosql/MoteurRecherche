@@ -30,7 +30,7 @@ class HomeController extends AbstractController
             "word" => $word,
             "settings" => $settings
         ];
-        $pythonPath = "C:\ProgramData\anaconda3\python.exe";  // Adjust the path
+        $pythonPath = "C:\ProgramData\anaconda3\python.exe";
         $pythonScriptPath = "C:\Users\seqqal\Documents\GitHub\Projects\MoteurRecherche\main.py";
         $process = new Process([
             $pythonPath, $pythonScriptPath, json_encode($data)
